@@ -32,7 +32,7 @@
     window.pictireSize.init();
 
     // проверка хэш-тегов и комментария
-    // this._form.reportValidity();
+
     this._inputHash.addEventListener('keyup', this._onInput);
     this._inputDesc.addEventListener('keyup', this._onTextArea);
     // добавление своих обработчиков
