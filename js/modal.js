@@ -15,6 +15,7 @@
     document.addEventListener('keydown', this._onKeyEscDown);
   };
 
+  // открытие окна
   Modal.prototype.open = function () {
     this._window.classList.remove('hidden');
     document.body.classList.add('modal-open');
@@ -29,6 +30,7 @@
     }
   };
 
+  // закрытие окна
   Modal.prototype.onBtnCloseClick = function () {
     this._closeBtn.removeEventListener('click', this.onBtnCloseClick);
     this._window.classList.add('hidden');
