@@ -10,7 +10,6 @@
     ARROW_RIGHT: 'ArrowRight',
   };
 
-
   var hideElement = function (element) {
     element.classList.add('hidden');
   };
@@ -37,8 +36,8 @@
   var initPopup = function (template) {
     var popupTemp = template.cloneNode(true);
     var popup = new window.Notice(popupTemp);
-    popup.init()
-  }
+    popup.init();
+  };
 
   window.utils = {
     KeyCode: KeyCode,

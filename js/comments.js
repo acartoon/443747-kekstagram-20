@@ -2,7 +2,6 @@
 
 (function () {
 
-
   function Comment(data, template) {
     this._data = data;
     this._comment = template.cloneNode(true);
