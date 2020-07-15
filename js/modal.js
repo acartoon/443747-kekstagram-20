@@ -24,7 +24,7 @@
   };
 
   Modal.prototype._onKeyEscDown = function (evt) {
-    if (evt.key === window.utils.KEYS.ESCAPE || evt.key === window.utils.KEYS.ESC) {
+    if (evt.key === window.utils.KeyCode.ESCAPE || evt.key === window.utils.KeyCode.ESC) {
       this.onBtnCloseClick();
       document.removeEventListener('keydown', this._onKeyEscDown);
     }

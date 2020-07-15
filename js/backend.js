@@ -1,19 +1,22 @@
 'use strict';
 
 (function () {
-  var URL_ADRESS = {
+  var STATUS_OK = 200;
+  var TIMEOUT = 10000; // 10 секунд
+  var templateSuccess = document.querySelector('#success').content.querySelector('.success');
+  var templateError = document.querySelector('#error').content.querySelector('.error');
+
+  var UrlAdress = {
     LOAD: 'https://javascript.pages.academy/kekstagram/data',
     SEND: 'https://javascript.pages.academy/kekstagram'
   };
 
-  var METHOD = {
+  var Method = {
     POST: 'POST',
     GET: 'GET'
   };
 
-  var STATUS_OK = 200;
-  var TIMEOUT = 10000; // 10 секунд
-  var TYPE = {
+  var Type = {
     JSON: 'json',
     FORM: 'multipart/form-data'
   };
@@ -39,28 +42,24 @@
 
   var load = function (onLoad, onError) {
     var xhr = new XMLHttpRequest();
-    configureXhr(xhr, onLoad, onError, TYPE.JSON);
-    xhr.open(METHOD.GET, URL_ADRESS.LOAD);
+    configureXhr(xhr, onLoad, onError, Type.JSON);
+    xhr.open(Method.GET, UrlAdress.LOAD);
     xhr.send();
   };
 
   var onSend = function (data, onLoad, onError) {
     var xhr = new XMLHttpRequest();
-    configureXhr(xhr, onLoad, onError, TYPE.JSON);
-    xhr.open(METHOD.POST, URL_ADRESS.SEND);
+    configureXhr(xhr, onLoad, onError, Type.JSON);
+    xhr.open(Method.POST, UrlAdress.SEND);
     xhr.send(data);
   };
 
   var showSuccessMessage = function () {
-    var template = document.querySelector('#success').content.querySelector('.success').cloneNode(true);
-    var success = new window.Notice(template);
-    success.init();
+    window.utils.initPopup(templateSuccess);
   };
 
   var showErrorMessage = function () {
-    var template = document.querySelector('#error').content.querySelector('.error').cloneNode(true);
-    var error = new window.Notice(template);
-    error.init();
+    window.utils.initPopup(templateError);
   };
 
   window.backend = {

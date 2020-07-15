@@ -17,7 +17,7 @@
     return this._comment;
   };
 
-  function RenderComments(data, container, btnLoadMore, renderComment) {
+  function Comments(data, container, btnLoadMore, renderComment) {
     this._container = container;
     this._data = data;
     this._btnLoadMore = btnLoadMore;
@@ -30,21 +30,21 @@
     this._renderComment = renderComment;
   }
 
-  RenderComments.prototype.init = function () {
+  Comments.prototype.init = function () {
     this._container.innerHTML = '';
-    window.utils.hiddenElement(this._btnLoadMore);
+    window.utils.hideElement(this._btnLoadMore);
     this._valueToRender = this._data.length > this._COMMENT_VALUE_STEP ? this._COMMENT_VALUE_STEP : this._data.length;
     this._commentsToRender = this._data.slice(0, this._valueToRender);
     this._renderComment.data = this._valueToRender + ' из ';
     this._render(this._commentsToRender);
     if (this._data.length > this._COMMENT_VALUE_STEP) {
-      window.utils.visibleElement(this._btnLoadMore);
+      window.utils.showElement(this._btnLoadMore);
 
       this._btnLoadMore.addEventListener('click', this._onBtnClick);
     }
   };
 
-  RenderComments.prototype._onBtnClick = function (evt) {
+  Comments.prototype._onBtnClick = function (evt) {
     evt.preventDefault();
     this._commentsToRender = this._data.slice(this._valueToRender, this._valueToRender + this._COMMENT_VALUE_STEP);
     this._render(this._commentsToRender);
@@ -53,19 +53,17 @@
     this._renderComment.data = this._valueToRender + ' из ';
 
     if (this._valueToRender >= this._data.length) {
-      window.utils.hiddenElement(this._btnLoadMore);
+      window.utils.hideElement(this._btnLoadMore);
       this._btnLoadMore.removeEventListener('click', this._onBtnClick);
     }
   };
 
-  RenderComments.prototype._render = function (commetnsData) {
+  Comments.prototype._render = function (commetnsData) {
     commetnsData.forEach(function (commentData) {
       var comment = new Comment(commentData, this._commentTemplate).init();
       this._container.append(comment);
     }.bind(this));
   };
 
-  window.RenderComments = {
-    RenderComments: RenderComments
-  };
+  window.Comments = Comments;
 })();

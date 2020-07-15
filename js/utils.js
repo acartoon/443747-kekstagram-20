@@ -1,21 +1,21 @@
 'use strict';
 
 (function () {
+  var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 
-  var KEYS_CODE = {
+  var KeyCode = {
     ESCAPE: 'Escape',
     ESC: 'Esc',
     ARROW_LEFT: 'ArrowLeft',
     ARROW_RIGHT: 'ArrowRight',
   };
 
-  var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 
-  var hiddenElement = function (element) {
+  var hideElement = function (element) {
     element.classList.add('hidden');
   };
 
-  var visibleElement = function (element) {
+  var showElement = function (element) {
     element.classList.remove('hidden');
   };
 
@@ -24,22 +24,28 @@
   };
 
   var getRandomElements = function (count, min, max) {
-    var result = [];
-    while (result.length < count) {
+    var elements = [];
+    while (elements.length < count) {
       var value = getRandomValue(min, max);
-      if (!result.includes(value)) {
-        result.push(value);
+      if (!elements.includes(value)) {
+        elements.push(value);
       }
     }
-    return result;
+    return elements;
   };
+
+  var initPopup = function (template) {
+    var popupTemp = template.cloneNode(true);
+    var popup = new window.Notice(popupTemp);
+    popup.init()
+  }
 
   window.utils = {
-    KEYS: KEYS_CODE,
+    KeyCode: KeyCode,
     FILE_TYPES: FILE_TYPES,
-    hiddenElement: hiddenElement,
-    visibleElement: visibleElement,
-    getRandomElements: getRandomElements
+    hideElement: hideElement,
+    showElement: showElement,
+    getRandomElements: getRandomElements,
+    initPopup: initPopup,
   };
-
 })();

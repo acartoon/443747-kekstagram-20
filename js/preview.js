@@ -18,7 +18,7 @@
   PreviewPicture.prototype._renderComments = function () {
     var commentCount = this._template.querySelector('.social__comment-count').firstChild;
     var commentsContainer = this._template.querySelector('.social__comments');
-    var comments = new window.RenderComments.RenderComments(this._photoData.comments, commentsContainer, this._btnLoader, commentCount);
+    var comments = new window.Comments(this._photoData.comments, commentsContainer, this._btnLoader, commentCount);
     comments.init();
   };
 

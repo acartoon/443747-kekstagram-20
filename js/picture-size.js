@@ -14,6 +14,7 @@
     defaultValue: 100,
   };
 
+  // устанавливает значение value при нажатии на кнопку scale__control
   getChangePictureSize.setValue = function (value) {
     getChangePictureSize.scaleСontrolValue.setAttribute('value', value + '%');
     getChangePictureSize.scaleСontrolValue.value = value + '%';
@@ -39,12 +40,14 @@
     getChangePictureSize.image.style.transform = 'scale(' + getChangePictureSize.initialValue / 100 + ')';
   };
 
-  getChangePictureSize.defaultParams = function () {
+  getChangePictureSize.setDefaultParams = function () {
+    getChangePictureSize.image.style = '';
+    getChangePictureSize.initialValue = getChangePictureSize.defaultValue;
     getChangePictureSize.setValue(getChangePictureSize.defaultValue);
   };
 
   getChangePictureSize.init = function () {
-    getChangePictureSize.defaultParams();
+    getChangePictureSize.setDefaultParams();
 
     getChangePictureSize.onBtnSmallerClick = getChangePictureSize.onBtnSmallerClick.bind(this);
     getChangePictureSize.onBtnBiggerClick = getChangePictureSize.onBtnBiggerClick.bind(this);
@@ -59,7 +62,7 @@
   };
 
   getChangePictureSize.reset = function () {
-    getChangePictureSize.defaultParams();
+    getChangePictureSize.setDefaultParams();
     getChangePictureSize.removeListeners();
   };
 

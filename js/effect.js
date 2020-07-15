@@ -47,7 +47,7 @@
   };
 
   // состояние по умолчанию
-  pictureEffects.defaultState = function () {
+  pictureEffects.setDefaultState = function () {
     pictureEffects.activeEffect = 'none';
     pictureEffects.image.classList = '';
     pictureEffects.image.style.filter = null;
@@ -62,7 +62,7 @@
     if (effect === 'none') {
       window.slider.hide();
     } else {
-      window.slider.visible();
+      window.slider.showSlider();
     }
     pictureEffects.applyFilter(effect);
   };
@@ -74,10 +74,10 @@
     var filterProperty = pictureEffects.getFilterProperty(pictureEffects.activeEffect);
     pictureEffects.image.className = filterProperty.name;
     if (effect === pictureEffects.DEFAULT_EFFECT) {
-      window.slider.default();
+      window.slider.setDefaultSettings();
     } else {
-      window.slider.visible();
-      window.slider.initialPosition();
+      window.slider.showSlider();
+      window.slider.setInitialPosition();
     }
   };
 
@@ -92,7 +92,7 @@
     pictureEffects.switches.forEach(function (input) {
       input.removeEventListener('click', pictureEffects.onClickSwitch);
     });
-    pictureEffects.defaultState();
+    pictureEffects.setDefaultState();
     pictureEffects.form.reset();
   };
 

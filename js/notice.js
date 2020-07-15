@@ -3,7 +3,7 @@
 (function () {
   function Notice(template) {
     this._template = template;
-    this._KEYS = window.utils.KEYS;
+    this._KEYS = window.utils.KeyCode;
     this._template = template.cloneNode(true);
     this._btn = this._template.querySelector('button');
     this._onEscKeydown = this._onEscKeydown.bind(this);

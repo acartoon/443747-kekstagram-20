@@ -26,19 +26,19 @@
   // применение значений по умолчанию значение 100% и без эффекта
   slider.sliderValue = slider.defaultValue;
 
-  slider.initialPositionSlider = function () {
+  slider.setInitialPositionSlider = function () {
     // устанавливает положение слайдера по умолчанию на 100%
     slider.updateSliderPosition(slider.defaultValue);
   };
 
   // применение значений по умолчанию значение 100% и без эффекта
-  slider.default = function () {
+  slider.setDefaultSettings = function () {
     slider.hideSlider();
-    slider.initialPositionSlider();
+    slider.setInitialPositionSlider();
   };
 
   // передвижение ползунка и передача значения в фукнцию по применению эффектов
-  slider.mousedown = function (evt) {
+  slider.onMousedown = function (evt) {
     evt.preventDefault();
     var pinCoordX = slider.pin.getBoundingClientRect().left;
     var shiftX = evt.clientX - pinCoordX;
@@ -75,10 +75,10 @@
 
   // при нажатии
   slider.onClickArrows = function (evt) {
-    if (evt.key === window.utils.KEYS.ARROW_LEFT) {
+    if (evt.key === window.utils.KeyCode.ARROW_LEFT) {
       var stepBack = slider.sliderValue - slider.STEP_ONCLICK;
       slider.sliderValue = (stepBack <= slider.MIN_VALUE) ? slider.MIN_VALUE : stepBack;
-    } else if (evt.key === window.utils.KEYS.ARROW_RIGHT) {
+    } else if (evt.key === window.utils.KeyCode.ARROW_RIGHT) {
       var stepForward = slider.sliderValue + slider.STEP_ONCLICK;
       slider.sliderValue = (stepForward >= slider.MAX_VALUE) ? slider.MAX_VALUE : stepForward;
     }
@@ -99,7 +99,7 @@
   };
 
   // отображение слайдера
-  slider.visibleSlider = function () {
+  slider.showSlider = function () {
     slider.sliderContainer.classList.remove('visually-hidden');
   };
 
@@ -109,25 +109,25 @@
 
   // инициализация применения эффектов
   slider.init = function () {
-    slider.default();
+    slider.setDefaultSettings();
     slider.pin.setAttribute('tabindex', 0);
-    slider.mousedown = slider.mousedown.bind(this);
+    slider.onMousedown = slider.onMousedown.bind(this);
     slider.pin.addEventListener('focus', slider.onPinFocus);
-    slider.pin.addEventListener('mousedown', slider.mousedown);
+    slider.pin.addEventListener('mousedown', slider.onMousedown);
   };
 
   slider.reset = function () {
-    slider.default();
+    slider.setDefaultSettings();
     slider.pin.removeEventListener('focus', slider.onPinFocus);
-    slider.pin.removeEventListener('mousedown', slider.mousedown);
+    slider.pin.removeEventListener('mousedown', slider.onMousedown);
   };
 
   window.slider = {
-    default: slider.default,
+    setDefaultSettings: slider.setDefaultSettings,
     init: slider.init,
     hide: slider.hideSlider,
-    visible: slider.visibleSlider,
-    initialPosition: slider.initialPositionSlider,
+    showSlider: slider.showSlider,
+    setInitialPosition: slider.setInitialPositionSlider,
     reset: slider.reset
   };
 })();
